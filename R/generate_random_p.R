@@ -1,0 +1,8 @@
+t <- abs(rnorm(25, 0.03, 0.1))
+print("pvalues")
+cat(sort(t), sep = ",", end = "\n")
+print("adjusted pvalues")
+a <- p.adjust(t, method = "fdr")
+cat(sort(a), sep = ",", end = "\n")
+print("a < 0.05")
+cat(sort(a) < 0.05, sep = ",", end = "\n")

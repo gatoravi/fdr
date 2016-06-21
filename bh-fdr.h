@@ -36,7 +36,7 @@ using namespace std;
 double bh_fdr(std::vector<double> input_pval, float alpha) {
     std::sort(input_pval.begin(), input_pval.end(), std::greater<double>());
     double m = input_pval.size();
-    double k = m; // This is the rank, doesn't need to be double.
+    uint32_t k = input_pval.size(); // This is the rank, doesn't need to be double.
     for (auto p_val : input_pval) {
         //cerr << endl << "p_val: " << p_val << " adjusted_p_val: " << (double)m/k * p_val;
         if (p_val <= (double)k/m * alpha) {

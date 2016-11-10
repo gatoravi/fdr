@@ -37,13 +37,15 @@ double bh_fdr(std::vector<double> input_pval, float alpha) {
     std::sort(input_pval.begin(), input_pval.end(), std::greater<double>());
     double m = input_pval.size();
     uint32_t k = input_pval.size(); // This is the rank, doesn't need to be double.
+    double previous_pval;
     for (auto p_val : input_pval) {
         //cerr << endl << "p_val: " << p_val << " adjusted_p_val: " << (double)m/k * p_val;
         if (p_val <= (double)k/m * alpha) {
-            cerr << endl << "all values below " << p_val << " are significant. index (1-based): " << k << endl;
-            return p_val;
+            cerr << endl << "All p-values less than " << previous_pval << " are significant. index (1-based): " << k << endl;
+            return previous_pval;
         }
         k--; //Decrease rank
+        previous_pval = p_val;
     }
     return -1;
 }
